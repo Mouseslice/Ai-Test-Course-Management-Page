@@ -1,0 +1,42 @@
+{
+  "topic_id": "5_2",
+  "title": "5_2 在网页中嵌入背景音乐",
+  "description_md": "# 任务描述：\n请在网页中添加背景音乐，提升页面氛围。\n\n## 要求：\n1. 使用 `<audio>` 标签并启用 `controls` 属性。\n2. 添加 `<source>` 元素，音频文件为 `background.mp3`，类型为 `audio/mpeg`。\n3. 添加 `<source>` 元素，音频文件为 `background.ogg`，类型为 `audio/ogg`。\n4. 提供后备文本，提示浏览器不支持音频播放。",
+  "start_code": {
+    "html": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n    <div class=\"list-demo\">\n  <h3>背景音乐播放器</h3>\n  # 请在此处添加音频！\n</div>\n</body>\n</html>",
+    "css": "",
+    "js": ""
+  },
+  "checkpoints": [
+    {
+      "name": "存在 audio 元素",
+      "type": "assert_attribute",
+      "selector": "audio",
+      "attribute": "controls",
+      "assertion_type": "exists",
+      "feedback": "请插入带有 controls 的 <audio> 音频控件。"
+    },
+    {
+      "name": "第一个 source 类型正确",
+      "type": "assert_attribute",
+      "selector": "audio source:first-child",
+      "attribute": "type",
+      "assertion_type": "equals",
+      "value": "audio/mpeg",
+      "feedback": "请确保第一个 source 类型为 audio/mpeg。"
+    },
+    {
+      "name": "audio 有回退文本",
+      "type": "assert_text_content",
+      "selector": "audio",
+      "assertion_type": "contains",
+      "value": "浏览器不支持音频播放",
+      "feedback": "请在 <audio> 标签中提供浏览器不支持的提示文本。"
+    }
+  ],
+  "answer": {
+    "html": "<div class=\"list-demo\">\n  <h3>背景音乐播放器</h3>\n  <audio controls>\n    <source src=\"background.mp3\" type=\"audio/mpeg\">\n    <source src=\"background.ogg\" type=\"audio/ogg\">\n    您的浏览器不支持音频播放\n  </audio>\n</div>",
+    "css": "",
+    "js": ""
+  }
+}

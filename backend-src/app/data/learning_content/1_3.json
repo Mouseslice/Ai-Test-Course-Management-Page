@@ -1,0 +1,42 @@
+{
+    "topic_id": "1_3",
+    "title": "1_3 构建页面基本结构",
+    "levels": [
+            {
+                "level": 1,
+                "description": "在前端开发中，HTML（HyperText Markup Language）是构建网页的基础语言。每一个网页都必须有一个清晰且规范的结构，才能被浏览器正确解析和显示。最基本的网页结构由几个关键标签组成：`<!DOCTYPE html>`、`<html>`、`<head>` 和 `<body>`。`<!DOCTYPE html>` 是文档类型声明，它告诉浏览器当前文档使用的是 HTML5 标准，这行代码必须放在整个文档的最顶部。接下来是 `<html>` 标签，它是整个 HTML 文档的根元素，所有其他内容都要包裹在这个标签内部。`lang` 属性可以设置网页的语言，比如 `lang=\"en\"` 表示英文，`lang=\"zh\"` 表示中文，这对搜索引擎优化和屏幕阅读器支持非常重要。`<head>` 标签用于包含页面的元数据，例如字符编码、视口设置和网页标题等，这些信息不会直接显示在页面上，但对页面的功能和表现至关重要。`<body>` 标签则是放置所有可见内容的地方，比如文字、图片、按钮等。最后，`<footer>` 通常位于页面底部，用来展示版权信息或相关链接。掌握这一基本结构是学习前端的第一步，只有打好基础，后续的内容才能顺利展开。"
+            },
+            {
+                "level": 2,
+                "description": "在实际开发中，一个完整的 HTML 页面结构不仅仅是写出标签那么简单，还需要考虑跨设备兼容性、可访问性和国际化支持。例如，设置 `<meta charset=\"UTF-8\">` 可以确保网页能正确显示各种语言的字符，包括中文、日文、表情符号等，避免出现乱码问题。而 `<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">` 则是为了让网页在手机等移动设备上正常显示，它会根据设备的屏幕宽度自动调整布局，防止页面被缩放得太小或太大。网页标题通过 `<title>` 标签定义，不仅影响浏览器标签页的显示名称，还直接影响搜索引擎的收录和排名。此外，`<footer>` 标签虽然看起来只是个简单的容器，但它属于语义化 HTML 的一部分，有助于提升代码的可读性和 SEO 效果。我们可以将 `<footer>` 放在 `<body>` 内部的任何位置，但通常放在页面末尾。这些标签常常组合使用，并与其他结构如 `<header>`、`<main>`、`<nav>` 配合，形成清晰的内容层次。理解它们之间的关系和作用场景，能够帮助开发者构建更专业、更易维护的网页结构。"
+            },
+            {
+                "level": 3,
+                "description": "深入理解 HTML 文档结构的本质，需要从浏览器渲染机制的角度来看待。当浏览器加载一个 HTML 文件时，首先会解析 `<!DOCTYPE>` 声明以确定文档模式，是标准模式还是怪异模式，这会影响后续的样式和布局计算。接着解析 `<html>` 标签及其属性，尤其是 `lang` 属性，它会影响语音合成、拼写检查和辅助技术的行为。`<head>` 中的元信息虽不显示，但在性能和功能上起着关键作用：字符集声明必须尽早出现，以便正确解码后续内容；viewport 设置决定了布局视口的大小，直接影响响应式设计的效果；title 标签还会影响社交分享时的预览标题。从 DOM（文档对象模型）角度看，`<html>` 是根节点，`<head>` 和 `<body>` 是其子节点，而 `<footer>` 是 `<body>` 的后代节点。这种树形结构使得 JavaScript 能够精准定位并操作页面元素。值得注意的是，HTML 规范要求某些标签不能省略，比如 `<html>`、`<head>`、`<body>`，即使省略浏览器会自动补全，但显式写出更利于代码清晰和团队协作。掌握这些底层机制，有助于编写更高效、更健壮的前端代码。"
+            },
+            {
+                "level": 4,
+                "description": "为了巩固对页面基本结构的理解，我们来完成一个综合练习：创建一个名为“我的个人博客”的网页，要求包含完整的 HTML 结构，并体现良好的语义化实践。首先，在文档开头添加 `<!DOCTYPE html>` 声明，确保使用 HTML5 模式。然后用 `<html lang=\"zh-CN\">` 定义文档根元素，并明确语言为中国大陆中文。在 `<head>` 中设置字符编码为 UTF-8，配置 viewport 以支持移动端，同时将网页标题设为“我的个人博客”。在 `<body>` 内部，添加一个 `<header>` 显示博客标题，一个 `<main>` 包含文章内容，最后用 `<footer>` 注明版权信息。这个结构不仅满足测试题的要求，也模拟了真实项目中的常见布局。通过这种方式，你可以系统地掌握 HTML 基础结构的构建逻辑，并为后续学习 CSS 和 JavaScript 打下坚实基础。\n\n```html\n<!DOCTYPE html>\n<html lang=\"zh-CN\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>我的个人博客</title>\n  </head>\n  <body>\n    <header>\n      <h1>欢迎来到我的博客</h1>\n    </header>\n    <main>\n      <p>这里记录我的学习与生活点滴。</p>\n    </main>\n    <footer>\n      <p>&copy; 2025 我的个人博客 版权所有</p>\n    </footer>\n  </body>\n</html>\n```"
+            }
+        ],
+    "sc_all": [
+        {"topic_id": "1_1", "select_element": ["h1", "h2", "h3", "h4", "h5", "h6", "p","span"]},
+        {"topic_id": "1_2", "select_element": []},
+        {"topic_id": "1_3", "select_element": ["<!DOCTYPE>", "html", "head", "body","meta", "title","footer"]},
+        {"topic_id": "2_1", "select_element": ["div"]},
+        {"topic_id": "2_2", "select_element": ["ol","li"]},
+        {"topic_id": "2_3", "select_element": ["ul"]},
+        {"topic_id": "3_1", "select_element": ["input", "button"]},
+        {"topic_id": "3_2", "select_element": ["label"]},
+        {"topic_id": "3_3", "select_element": ["form"]},
+        {"topic_id": "4_1", "select_element": []},
+        {"topic_id": "4_2", "select_element": []},
+        {"topic_id": "4_3", "select_element": []},
+        {"topic_id": "5_1", "select_element": ["img"]},
+        {"topic_id": "5_2", "select_element": ["audio","source"]},
+        {"topic_id": "5_3", "select_element": ["video"]},
+        {"topic_id": "6_1", "select_element": []},
+        {"topic_id": "6_2", "select_element": []},
+        {"topic_id": "6_3", "select_element": []}
+    ]
+}

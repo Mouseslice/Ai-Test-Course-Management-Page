@@ -1,0 +1,44 @@
+{
+  "topic_id": "6_2",
+  "title": "6_2 获取用户邮箱并弹出确认信息",
+  "description_md": "# 任务描述：\n请使用 JavaScript 获取邮箱输入内容，并在点击按钮时通过提示框显示。\n\n## 要求：\n1. 使用 `document.getElementById('emailInput').value` 获取输入框的值。\n2. 点击按钮后弹出提示框，内容为“邮箱已接收: example@example.com”。",
+  "start_code": {
+    "html": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n    <div class=\"search-bar\">\n  <input type=\"email\" placeholder=\"请输入您的邮箱\" id=\"emailInput\">\n  <button id=\"submitBtn\">提交</button>\n</div>\n</body>\n</html>",
+    "css": "",
+    "js": "# 请在此处添加JavaScript代码！"
+  },
+  "checkpoints": [
+    {
+      "name": "检查邮箱输入框是否存在",
+      "type": "assert_element",
+      "selector": "#emailInput",
+      "assertion_type": "exists",
+      "feedback": "请确保页面中存在一个ID为emailInput的输入框。"
+    },
+    {
+      "name": "检查提交按钮是否存在",
+      "type": "assert_element",
+      "selector": "#submitBtn",
+      "assertion_type": "exists",
+      "feedback": "请确保页面中存在一个ID为submitBtn的按钮。"
+    },
+    {
+      "name": "点击按钮后获取用户输入并展示",
+      "type": "interaction_and_assert",
+      "feedback": "验证点击提交按钮后是否正确获取并显示输入的邮箱地址",
+      "action_selector": "#submitBtn",
+      "action_type": "click",
+      "assertion": {
+        "type": "custom_script",
+        "name": "验证按钮功能",
+        "script": "const i=document.getElementById('emailInput');if(!i)return false;i.value=`test@example.com`;document.getElementById('submitBtn').click();return Array.isArray(window.__alertMessages)&&window.__alertMessages.some(m=>m.includes(`test@example.com`));",
+        "feedback": "请确保点击提交按钮时能够正确获取并显示输入框中的邮箱地址，例如“test@example.com”。"
+      }
+    }
+  ],
+  "answer": {
+    "html": "<div class=\"search-bar\">\n  <input type=\"email\" placeholder=\"请输入您的邮箱\" id=\"emailInput\">\n  <button id=\"submitBtn\">提交</button>\n</div>",
+    "css": "",
+    "js": "document.getElementById('submitBtn').addEventListener('click', function() {\n  var email = document.getElementById('emailInput').value;\n  alert('邮箱已接收: ' + email);\n});"
+  }
+}

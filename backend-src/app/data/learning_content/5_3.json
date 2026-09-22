@@ -1,0 +1,42 @@
+{
+    "topic_id": "5_3",
+    "title": "5_3 嵌入视频内容",
+    "levels": [
+            {
+                "level": 1,
+                "description": "在网页中展示视频是现代前端开发中的常见需求，HTML 提供了专门的 `<video>` 标签来实现这一功能。`<video>` 是一个块级元素，用于在页面中嵌入视频内容，比如电影、教学录像或用户上传的视频片段。最基本的用法是使用 `<video>` 标签，并通过 `src` 属性指定视频文件的路径。但更推荐的做法是结合 `<source>` 标签，因为它可以提供多个视频源，适配不同浏览器对视频格式的支持差异。例如，有的浏览器支持 MP4 格式，有的则支持 WebM。此外，`controls` 属性非常关键，它会为视频添加播放、暂停、音量和进度条等默认控件，让用户可以直接与视频交互。如果浏览器不支持任何提供的视频格式，`<video>` 标签内部的文本内容将作为回退提示显示，告诉用户当前环境无法播放视频。这种设计体现了 HTML 的渐进增强理念，确保内容在各种环境下都能被理解。宽度可以通过 `width` 属性设置，常见的做法是设为百分比，使其在不同设备上自适应布局。掌握这些基础属性是学习多媒体嵌入的第一步。"
+            },
+            {
+                "level": 2,
+                "description": "在实际项目中，嵌入视频不仅仅是让其能播放，还需要考虑用户体验和兼容性。通常一个完整的 `<video>` 结构会包含多个 `<source>` 子标签，每个标签指向不同格式的视频文件，浏览器会按顺序尝试加载直到找到支持的格式。例如先尝试 MP4，再试 WebM。这提高了视频在不同设备和浏览器上的可用性。除了 `src` 和 `type`，还可以设置 `poster` 属性，它指定视频加载前显示的封面图片，提升视觉吸引力。自动播放可以通过 `autoplay` 实现，但出于用户体验考虑，大多数浏览器要求视频静音才能自动播放，因此常配合 `muted` 使用。循环播放则通过 `loop` 控制。另外，`preload` 属性可以控制视频的预加载行为，如 `metadata` 表示只加载元数据，节省流量。响应式设计中，将 `width` 设为 `100%` 并配合父容器的 `max-width` 可以让视频在手机、平板和桌面端都良好显示。同时，回退文本应清晰友好，比如‘您的浏览器不支持视频播放，请升级浏览器或使用其他设备观看’，帮助用户理解问题所在。这些细节共同构成了一个健壮的视频嵌入方案。"
+            },
+            {
+                "level": 3,
+                "description": "深入理解 `<video>` 标签的工作机制有助于优化性能和提升可维护性。浏览器在解析 `<video>` 时并不会立即下载整个视频文件，而是根据 `preload` 策略决定加载程度。设置为 `none` 可以显著减少初始页面加载时间，特别适合移动网络环境。视频的编码格式也会影响性能，H.264 编码的 MP4 文件兼容性最好，而 VP9 编码的 WebM 文件体积更小，适合带宽受限场景。JavaScript 可以通过 DOM API 控制视频播放状态，例如调用 `play()`、`pause()` 方法，监听 `loadedmetadata`、`timeupdate` 等事件来实现自定义播放器界面。CSS 同样可以美化视频外观，比如添加圆角、阴影或全屏按钮。需要注意的是，移动端 Safari 对内联视频播放有特殊限制，可能需要添加 `playsinline` 属性才能避免自动全屏。此外，无障碍访问方面，应提供字幕轨道（使用 `<track>` 标签）和描述性 `alt` 文本的替代方案，确保视障用户也能获取信息。综合来看，视频嵌入不仅是标签的简单使用，更是涉及网络、性能、交互和可访问性的系统工程。"
+            },
+            {
+                "level": 4,
+                "description": "为了巩固对视频嵌入的理解，我们来实现一个关于自然风光的展示页面。该页面将嵌入一段风景视频，并确保在各种浏览器中正常播放，同时具备良好的响应式设计和用户体验。以下是一个完整示例：\n\n```html\n<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>自然风光视频展示</title>\n  <style>\n    body {\n      margin: 0;\n      font-family: 'Arial', sans-serif;\n      background-color: #f0f8ff;\n      color: #333;\n      display: flex;\n      justify-content: center;\n      padding: 2rem;\n    }\n    .video-wrapper {\n      width: 100%;\n      max-width: 800px;\n      border-radius: 12px;\n      overflow: hidden;\n      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);\n    }\n    video {\n      width: 100%;\n      display: block;\n    }\n    header {\n      text-align: center;\n      margin-bottom: 2rem;\n    }\n    header h1 {\n      color: #2e8b57;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <header>\n      <h1>自然之美：山川湖海</h1>\n    </header>\n    <div class=\"video-wrapper\">\n      <video controls poster=\"landscape-preview.jpg\">\n        <source src=\"landscape-video.mp4\" type=\"video/mp4\" />\n        <source src=\"landscape-video.webm\" type=\"video/webm\" />\n        您的浏览器不支持视频播放功能，请尝试更新浏览器或更换设备查看。\n      </video>\n    </div>\n  </div>\n</body>\n</html>\n```\n这个例子涵盖了 `controls`、多 `source`、`poster`、`width: 100%` 和回退文本等核心知识点，适合作为实战练习。"
+            }
+        ],
+    "sc_all": [
+        {"topic_id": "1_1", "select_element": ["h1", "h2", "h3", "h4", "h5", "h6", "p","span"]},
+        {"topic_id": "1_2", "select_element": []},
+        {"topic_id": "1_3", "select_element": ["<!DOCTYPE>", "html", "head", "body","meta", "title","footer"]},
+        {"topic_id": "2_1", "select_element": ["div"]},
+        {"topic_id": "2_2", "select_element": ["ol","li"]},
+        {"topic_id": "2_3", "select_element": ["ul"]},
+        {"topic_id": "3_1", "select_element": ["input", "button"]},
+        {"topic_id": "3_2", "select_element": ["label"]},
+        {"topic_id": "3_3", "select_element": ["form"]},
+        {"topic_id": "4_1", "select_element": []},
+        {"topic_id": "4_2", "select_element": []},
+        {"topic_id": "4_3", "select_element": []},
+        {"topic_id": "5_1", "select_element": ["img"]},
+        {"topic_id": "5_2", "select_element": ["audio","source"]},
+        {"topic_id": "5_3", "select_element": ["video"]},
+        {"topic_id": "6_1", "select_element": []},
+        {"topic_id": "6_2", "select_element": []},
+        {"topic_id": "6_3", "select_element": []}
+    ]
+}

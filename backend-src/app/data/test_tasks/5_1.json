@@ -1,0 +1,48 @@
+{
+  "topic_id": "5_1",
+  "title": "5_1 插入并管理网页中的图片元素",
+  "description_md": "# 任务描述：\n请在商品卡片中插入图片，并设置合适的展示样式。\n\n## 要求：\n1. 在 `.card` 元素的顶部添加 `<img>` 标签。\n2. 每个图片需包含 `src` 和 `alt` 属性。\n3. 设置图片宽度为 `100%`，并使用 `object-fit: cover` 保持比例裁剪。",
+  "start_code": {
+    "html": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n    <div class=\"card\">\n  # 请在这里插入图片！\n  <div class=\"card-content\">\n    <h3>智能手表</h3>\n    <p>分类：数码</p>\n    <p>价格：￥1299</p>\n  </div>\n</div>\n<div class=\"card\">\n  # 请在这里插入图片！\n  <div class=\"card-content\">\n    <h3>保温杯</h3>\n    <p>分类：家居</p>\n    <p>价格：￥89</p>\n  </div>\n</div>\n</body>\n</html>",
+    "css": "# 请在此处添加CSS样式代码！",
+    "js": ""
+  },
+  "checkpoints": [
+    {
+      "name": "第一张卡片中插入图片",
+      "type": "assert_attribute",
+      "selector": ".card:nth-of-type(1) img",
+      "attribute": "src",
+      "assertion_type": "exists",
+      "feedback": "请为第一张卡片添加 img 元素并设置 src 属性。"
+    },
+    {
+      "name": "图片包含 alt 属性",
+      "type": "assert_attribute",
+      "selector": ".card:nth-of-type(1) img",
+      "attribute": "alt",
+      "assertion_type": "exists",
+      "feedback": "请为图片添加 alt 属性，以增强无障碍性。"
+    },
+    {
+      "name": "图片宽度为 100%",
+      "type": "custom_script",
+      "script": "const css = document.querySelector('style') ? document.querySelector('style').textContent : ''; return css.includes('.card img') && css.includes('width: 100%');",
+      "feedback": "请将图片宽度设置为 100%。"
+    },
+    {
+      "name": "图片裁剪样式",
+      "type": "assert_style",
+      "selector": ".card:nth-of-type(1) img",
+      "css_property": "object-fit",
+      "assertion_type": "equals",
+      "value": "cover",
+      "feedback": "为避免图片拉伸变形，请设置 object-fit: cover。"
+    }
+  ],
+  "answer": {
+    "html": "<div class=\"card\">\n  <img src=\"watch.jpg\" alt=\"智能手表\">\n  <div class=\"card-content\">\n    <h3>智能手表</h3>\n    <p>分类：数码</p>\n    <p>价格：￥1299</p>\n  </div>\n</div>\n<div class=\"card\">\n  <img src=\"cup.jpg\" alt=\"保温杯\">\n  <div class=\"card-content\">\n    <h3>保温杯</h3>\n    <p>分类：家居</p>\n    <p>价格：￥89</p>\n  </div>\n</div>",
+    "css": ".card img {\n  width: 100%;\n  height: 150px;\n  object-fit: cover;\n}",
+    "js": ""
+  }
+}

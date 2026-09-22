@@ -1,0 +1,49 @@
+# ============ Python ============
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# ============ 前端构建产物 ============
+node_modules/
+dist/
+# 教师端构建产物（部署时拷贝，不纳入源码仓库）
+frontend-src/teacher-dist/
+
+# ============ Docker 构建产物 ============
+# artifacts/ 存放导出的镜像 tar（数百 MB，不纳入仓库）
+artifacts/
+
+# ============ 数据库 / 备份（严禁上传）============
+*.db
+*.db-wal
+*.db-shm
+*.bak
+backend_data/
+# 注意：app/db/ 下的建表源码（database.py / init_db.py / base_class.py）需要入库，
+# 仅排除数据库文件（上面的 *.db 已覆盖）
+
+# ============ 环境与密钥 ============
+.env
+.env.local
+.env.*.local
+
+# ============ 机器学习模型权重 ============
+# sentiment_bert 模型权重 437MB，超过 GitHub 单文件 100MB 上限，需自行重新下载/训练
+backend-src/models/sentiment_bert/
+*.safetensors
+*.pth
+*.pt
+*.onnx
+
+# ============ Celery 运行产物 ============
+celerybeat-schedule
+celerybeat.pid
+
+# ============ 日志 / 系统文件 ============
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

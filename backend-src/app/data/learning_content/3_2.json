@@ -1,0 +1,42 @@
+{
+    "topic_id": "3_2",
+    "title": "3_2 复选框与单选框",
+    "levels": [
+            {
+                "level": 1,
+                "description": "在网页开发中，表单是用户与网站交互的重要方式之一。复选框（checkbox）和单选框（radio button）是表单中用于让用户从多个选项中进行选择的控件。复选框允许用户选择一个或多个选项，比如兴趣爱好可以选择多项；而单选框则限制用户只能从一组互斥的选项中选择一项，比如性别或是否同意条款。它们都通过HTML中的`<input>`标签创建，通过设置`type`属性来区分类型：当`type=\"checkbox\"`时为复选框，`type=\"radio\"`时为单选框。每个输入框通常会搭配一个`<label>`标签，用来提升可访问性——点击文字也能选中对应的框。`name`属性用于标识这一组选项，在数据提交时作为键名使用，相同`name`值的单选框会被视为同一组，确保只能选中一个。这些基础控件虽然简单，但构成了用户输入信息的核心部分，是前端开发不可或缺的知识点。"
+            },
+            {
+                "level": 2,
+                "description": "在实际项目中，复选框和单选框常常需要与其他HTML结构结合使用，以实现更好的布局和用户体验。例如，我们可以将多个复选框包裹在`<fieldset>`和`<legend>`标签内，形成一个逻辑分组，并为其添加标题说明。为了便于样式控制和响应式设计，通常会把每一个选项放在一个`<div>`或`<li>`容器中，配合CSS进行美化。此外，`value`属性决定了用户选择后提交给服务器的具体值，而显示给用户的文字则写在`<label>`标签中，两者可以不同。JavaScript也可以监听这些元素的变化事件，比如`change`事件，从而动态更新页面内容或验证用户输入。值得注意的是，单选框必须保证同一组内的所有选项具有相同的`name`属性，否则无法实现互斥效果。通过合理组织HTML结构、使用语义化标签并结合CSS与JavaScript，可以让这些基本控件变得更加易用和美观。"
+            },
+            {
+                "level": 3,
+                "description": "深入理解复选框和单选框的工作机制有助于编写更高效和可维护的代码。浏览器在解析`<input type=\"radio\">`时，会根据`name`属性自动建立组关系，当用户选择其中一个时，其他同名的单选框会被自动取消选中，这是由浏览器原生行为实现的，无需额外JavaScript干预。而对于复选框，其状态独立，每个都可以单独切换。从DOM操作角度看，可以通过JavaScript访问`checked`属性来判断是否被选中，或通过赋值来设置状态。性能方面，大量使用这类输入框时应注意避免频繁的重排与重绘，推荐使用事件委托来监听父容器的事件，而不是为每个输入框单独绑定监听器。此外，使用`<label>`的`for`属性关联输入框的`id`，不仅能提高可访问性，还能增强触摸设备上的点击体验。现代框架如Vue或React中，这些输入框常被用于双向绑定，其底层原理正是基于对`value`和`checked`属性的监控与同步。掌握这些底层机制，能帮助开发者更好地调试问题并优化交互逻辑。"
+            },
+            {
+                "level": 4,
+                "description": "现在我们来完成一个综合练习，帮助你巩固对复选框和单选框的理解。假设我们要创建一个宠物领养问卷，其中包含两个部分：兴趣选择和宠物类型选择。首先，创建两个复选框，`name`为\"interests\"，`value`分别为\"walk\"和\"play\"，对应的文字为“喜欢散步”和“喜欢玩耍”。然后在下方创建一组单选框，`name`为\"petType\"，`value`分别为\"dog\"和\"cat\"，对应的文字为“狗狗”和“猫咪”。注意使用`<label>`标签正确关联每个输入框，并确保单选框在同一组内具有相同的`name`。以下是示例代码：\n\n```html\n<form>\n  <p>请选择宠物的兴趣：</p>\n  <label>\n    <input type=\"checkbox\" name=\"interests\" value=\"walk\"> 喜欢散步\n  </label><br>\n  <label>\n    <input type=\"checkbox\" name=\"interests\" value=\"play\"> 喜欢玩耍\n  </label><br><br>\n\n  <p>请选择宠物类型：</p>\n  <label>\n    <input type=\"radio\" name=\"petType\" value=\"dog\"> 狗狗\n  </label><br>\n  <label>\n    <input type=\"radio\" name=\"petType\" value=\"cat\"> 猫咪\n  </label>\n</form>\n```\n\n这个例子涵盖了HTML结构、语义化标签使用、表单控件属性设置以及用户交互设计的基本原则，为你后续完成测试题打下坚实基础。"
+            }
+        ],
+    "sc_all": [
+        {"topic_id": "1_1", "select_element": ["h1", "h2", "h3", "h4", "h5", "h6", "p","span"]},
+        {"topic_id": "1_2", "select_element": []},
+        {"topic_id": "1_3", "select_element": ["<!DOCTYPE>", "html", "head", "body","meta", "title","footer"]},
+        {"topic_id": "2_1", "select_element": ["div"]},
+        {"topic_id": "2_2", "select_element": ["ol","li"]},
+        {"topic_id": "2_3", "select_element": ["ul"]},
+        {"topic_id": "3_1", "select_element": ["input", "button"]},
+        {"topic_id": "3_2", "select_element": ["label"]},
+        {"topic_id": "3_3", "select_element": ["form"]},
+        {"topic_id": "4_1", "select_element": []},
+        {"topic_id": "4_2", "select_element": []},
+        {"topic_id": "4_3", "select_element": []},
+        {"topic_id": "5_1", "select_element": ["img"]},
+        {"topic_id": "5_2", "select_element": ["audio","source"]},
+        {"topic_id": "5_3", "select_element": ["video"]},
+        {"topic_id": "6_1", "select_element": []},
+        {"topic_id": "6_2", "select_element": []},
+        {"topic_id": "6_3", "select_element": []}
+    ]
+}

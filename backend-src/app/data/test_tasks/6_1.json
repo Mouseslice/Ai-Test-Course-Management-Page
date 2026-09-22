@@ -1,0 +1,44 @@
+{
+  "topic_id": "6_1",
+  "title": "6_1 为登录按钮添加点击事件",
+  "description_md": "# 任务描述：\n请为“登录”按钮添加点击事件，实现输入与交互功能。\n\n## 要求：\n1. 给按钮添加 `onclick` 属性或使用 JavaScript 添加事件监听器。\n2. 点击按钮时获取用户名输入框的内容。\n3. 弹出提示框显示欢迎信息，例如“欢迎, 张三!”。",
+  "start_code": {
+    "html": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n    <div class=\"login-bar\">\n  <input type=\"text\" placeholder=\"请输入用户名\" id=\"usernameInput\">\n  <button id=\"loginBtn\">登录</button>\n</div>\n</body>\n</html>",
+    "css": "",
+    "js": "# 请在此处添加你的JavaScript代码！"
+  },
+  "checkpoints": [
+    {
+      "name": "点击后弹出提示",
+      "type": "interaction_and_assert",
+      "feedback": "验证按钮点击事件是否触发弹窗",
+      "action_selector": "#loginBtn",
+      "action_type": "click",
+      "assertion": {
+        "type": "custom_script",
+        "name": "验证弹窗脚本",
+        "feedback": "点击“登录”按钮后，应该弹出用户输入的用户名，例如“张三”。",
+        "script": "const i=document.getElementById('usernameInput');if(!i)return false;i.value=`张三`;document.getElementById('loginBtn').click();return Array.isArray(window.__alertMessages)&&window.__alertMessages.some(m=>m.includes(`张三`));"
+      }
+    },
+    {
+      "name": "按钮元素存在",
+      "type": "assert_element",
+      "selector": "#loginBtn",
+      "assertion_type": "exists",
+      "feedback": "请确保页面中存在一个ID为loginBtn的按钮。"
+    },
+    {
+      "name": "输入框元素存在",
+      "type": "assert_element",
+      "selector": "#usernameInput",
+      "assertion_type": "exists",
+      "feedback": "请确保页面中存在一个ID为usernameInput的输入框。"
+    }
+  ],
+  "answer": {
+    "html": "<div class=\"login-bar\">\n  <input type=\"text\" placeholder=\"请输入用户名\" id=\"usernameInput\">\n  <button id=\"loginBtn\">登录</button>\n</div>",
+    "css": "",
+    "js": "const btn = document.getElementById('loginBtn');\nbtn.addEventListener('click', () => {\n  const name = document.getElementById('usernameInput').value;\n  alert(`欢迎, ${name}!`);\n});"
+  }
+}

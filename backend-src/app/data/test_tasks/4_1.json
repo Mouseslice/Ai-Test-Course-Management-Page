@@ -1,0 +1,44 @@
+{
+  "topic_id": "4_1",
+  "title": "4_1 设置网页的颜色、字体与背景",
+  "description_md": "# 任务描述：\n请为整个网页设置统一的字体和背景样式，使页面更加美观一致。\n\n## 要求：\n1. 为 `body` 元素设置字体为 `Helvetica, sans-serif`。\n2. 设置字体颜色为深蓝色（`#003366`）。\n3. 设置背景为从浅蓝到白色的渐变色：`linear-gradient(to bottom, #cce6ff, #ffffff)`。",
+  "start_code": {
+    "html": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n  <h1>编程学习教程 2025</h1>\n  <p>欢迎来到编程学习教程网站</p>\n</body>\n</html>",
+    "css": "# 请在此处添加你的CSS样式代码！",
+    "js": ""
+  },
+  "checkpoints": [
+    {
+      "name": "字体设置检查",
+      "type": "assert_style",
+      "selector": "body",
+      "css_property": "font-family",
+      "assertion_type": "contains",
+      "value": "Helvetica",
+      "feedback": "请将 body 的字体设置为 Helvetica。"
+    },
+    {
+      "name": "字体颜色检查",
+      "type": "assert_style",
+      "selector": "body",
+      "css_property": "color",
+      "assertion_type": "equals",
+      "value": "#003366",
+      "feedback": "请将文字颜色设置为深蓝色（#003366）。"
+    },
+    {
+      "name": "背景渐变色检查",
+      "type": "assert_style",
+      "selector": "body",
+      "css_property": "background",
+      "assertion_type": "contains",
+      "value": "linear-gradient",
+      "feedback": "请为 body 设置从浅蓝到白的渐变背景。"
+    }
+  ],
+  "answer": {
+    "html": "<body>\n  <h1>编程学习教程 2025</h1>\n  <p>欢迎来到编程学习教程网站</p>\n</body>",
+    "css": "body {\n  font-family: Helvetica, sans-serif;\n  color: #003366;\n  background: linear-gradient(to bottom, #cce6ff, #ffffff);\n}",
+    "js": ""
+  }
+}

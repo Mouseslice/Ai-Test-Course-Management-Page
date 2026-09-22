@@ -1,0 +1,74 @@
+{
+  "topic_id": "3_end",
+  "title": "3_end 第3章表单与交互控件综合测试",
+  "description_md": "# 任务描述：\n请综合运用本章所学知识点，继续构建 “WCF Best Cat Exhibition”（WCF最佳猫咪展览） 介绍页面，完成表单部分的添加。\n\n## 要求：\n1. 在右侧边栏 `<div id=\"sidebar\">` 内添加表单容器：\n   - 使用 `<form>` 元素。\n   - 为 `<form>` 绑定 `onsubmit` 事件：`handleSubmit(event)`。\n2. 添加表单输入控件：\n   - 文本输入框（placeholder：Your Name）。\n   - 邮箱输入框（placeholder：Your Email）。\n   - 复选框，关联 `label` 文本为 “Subscribe to newsletter”。\n3. 添加提交按钮：\n   - 文本为 “Join the Cat Family”。\n   - `type` 属性为 `submit`。\n4. 编写 JavaScript 处理函数：\n   - 在 `handleSubmit` 中阻止表单默认提交行为。\n   - 获取表单数据并输出到控制台。",
+  "start_code": {
+    "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>WCF Best Cat Exhibition</title>\n    <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n    <h1>WCF Best Cat Exhibition</h1>\n    <h2>Welcome to the Cat Exhibition</h2>\n    <p>Join us for a <span class=\"bold-text\">purr-fect</span> celebration of feline beauty and <span class=\"italic-text\">grace</span>. Discover various cat breeds and experience the excitement of the event!</p>\n    \n    <div id=\"main-container\">\n        <div id=\"content\">\n            <h3>Event Highlights</h3>\n            <ol>\n                <li>Opening Ceremony</li>\n                <li>Cat Parades</li>\n                <li>Best in Show Award</li>\n                <li>Cat Care Workshop</li>\n            </ol>\n        </div>\n        \n        <div id=\"sidebar\">\n            <h3>Daily Schedule</h3>\n            <ul>\n                <li>10:00 AM - Doors Open</li>\n                <li>12:00 PM - Lunch Break</li>\n                <li>03:00 PM - Cat Parade</li>\n                <li>04:00 PM - Photography Contest</li>\n                <li>05:00 PM - Award Ceremony</li>\n            </ul>\n        </div>\n    </div>\n</body>\n</html>",
+    "css": ".bold-text {\n    font-weight: bold;\n}\n\n.italic-text {\n    font-style: italic;\n}\n\n#main-container {\n    width: 80%;\n    margin: 0 auto;\n}\n\n#content {\n    float: left;\n    width: 65%;\n}\n\n#sidebar {\n    float: right;\n    width: 30%;\n}",
+    "js": ""
+  },
+  "checkpoints": [
+    {
+      "name": "form元素存在检查",
+      "type": "assert_element",
+      "selector": "#sidebar form",
+      "assertion_type": "exists",
+      "feedback": "请在右侧边栏内添加一个form元素"
+    },
+    {
+      "name": "form的onsubmit属性检查",
+      "type": "assert_attribute",
+      "selector": "#sidebar form",
+      "attribute": "onsubmit",
+      "assertion_type": "exists",
+      "feedback": "请为form元素添加onsubmit属性"
+    },
+    {
+      "name": "姓名输入框存在检查",
+      "type": "assert_element",
+      "selector": "#sidebar input[type='text']",
+      "assertion_type": "exists",
+      "feedback": "请添加一个文本输入框用于输入姓名"
+    },
+    {
+      "name": "邮箱输入框存在检查",
+      "type": "assert_element",
+      "selector": "#sidebar input[type='email']",
+      "assertion_type": "exists",
+      "feedback": "请添加一个邮箱输入框用于输入邮箱"
+    },
+    {
+      "name": "复选框存在检查",
+      "type": "assert_element",
+      "selector": "#sidebar input[type='checkbox']",
+      "assertion_type": "exists",
+      "feedback": "请添加一个复选框用于邮件订阅"
+    },
+    {
+      "name": "提交按钮存在检查",
+      "type": "assert_element",
+      "selector": "#sidebar button[type='submit']",
+      "assertion_type": "exists",
+      "feedback": "请添加一个提交按钮"
+    },
+    {
+      "name": "提交按钮文本检查",
+      "type": "assert_text_content",
+      "selector": "#sidebar button[type='submit']",
+      "assertion_type": "equals",
+      "value": "Join the Cat Family",
+      "feedback": "提交按钮的文本应为'Join the Cat Family'"
+    },
+    {
+      "name": "JavaScript handleSubmit函数检查",
+      "type": "custom_script",
+      "script": "return typeof handleSubmit === 'function';",
+      "feedback": "请定义handleSubmit函数处理表单提交"
+    }
+  ],
+  "answer": {
+    "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>WCF Best Cat Exhibition</title>\n    <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n    <h1>WCF Best Cat Exhibition</h1>\n    <h2>Welcome to the Cat Exhibition</h2>\n    <p>Join us for a <span class=\"bold-text\">purr-fect</span> celebration of feline beauty and <span class=\"italic-text\">grace</span>. Discover various cat breeds and experience the excitement of the event!</p>\n    \n    <div id=\"main-container\">\n        <div id=\"content\">\n            <h3>Event Highlights</h3>\n            <ol>\n                <li>Opening Ceremony</li>\n                <li>Cat Parades</li>\n                <li>Best in Show Award</li>\n                <li>Cat Care Workshop</li>\n            </ol>\n        </div>\n        \n        <div id=\"sidebar\">\n            <h3>Daily Schedule</h3>\n            <ul>\n                <li>10:00 AM - Doors Open</li>\n                <li>12:00 PM - Lunch Break</li>\n                <li>03:00 PM - Cat Parade</li>\n                <li>04:00 PM - Photography Contest</li>\n                <li>05:00 PM - Award Ceremony</li>\n            </ul>\n            <form onsubmit=\"handleSubmit(event)\">\n                <div>\n                    <label for=\"name\">Your Name:</label>\n                    <input type=\"text\" id=\"name\" placeholder=\"Your Name\" required>\n                </div>\n                <div>\n                    <label for=\"email\">Your Email:</label>\n                    <input type=\"email\" id=\"email\" placeholder=\"Your Email\" required>\n                </div>\n                <div>\n                    <label>\n                        <input type=\"checkbox\" id=\"subscribe\" name=\"subscribe\"> Subscribe to newsletter\n                    </label>\n                </div>\n                <button type=\"submit\">Join the Cat Family</button>\n            </form>\n        </div>\n    </div>\n</body>\n</html>",
+    "css": ".bold-text {\n    font-weight: bold;\n}\n\n.italic-text {\n    font-style: italic;\n}\n\n#main-container {\n    width: 80%;\n    margin: 0 auto;\n}\n\n#content {\n    float: left;\n    width: 65%;\n}\n\n#sidebar {\n    float: right;\n    width: 30%;\n}\n\n#sidebar form {\n    margin-top: 20px;\n}\n\n#sidebar form div {\n    margin-bottom: 15px;\n}\n\n#sidebar input[type=\"text\"],\n#sidebar input[type=\"email\"] {\n    width: 100%;\n    padding: 8px;\n    border: 1px solid #ddd;\n    border-radius: 4px;\n    box-sizing: border-box;\n}\n\n#sidebar button {\n    width: 100%;\n    padding: 10px;\n    background-color: #4CAF50;\n    color: white;\n    border: none;\n    border-radius: 4px;\n    cursor: pointer;\n    font-size: 16px;\n}\n\n#sidebar button:hover {\n    background-color: #45a049;\n}\n\nh1, h2, h3 {\n    color: #333;\n}\n\nul {\n    line-height: 1.6;\n}\n\np {\n    line-height: 1.6;\n    color: #666;\n}",
+    "js": "function handleSubmit(event) {\n    event.preventDefault();\n    \n    const name = document.getElementById('name').value;\n    const email = document.getElementById('email').value;\n    const subscribeElement = document.getElementById('subscribe');\n    const subscribe = subscribeElement && subscribeElement.checked;\n    \n    console.log('Form data:', { name, email, subscribe });\n    \n    // Here you can add actual form processing logic\n    alert('Thank you for joining!');\n}"
+  }
+}

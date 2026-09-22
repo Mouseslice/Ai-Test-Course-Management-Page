@@ -1,0 +1,313 @@
+# backend/app/services/llm_gateway.py
+import os
+import asyncio
+import time
+from typing import List, Dict, Any, Optional
+from openai import (
+    OpenAI,
+    APIConnectionError,
+    APITimeoutError,
+    RateLimitError,
+    InternalServerError,
+)
+from app.core.config import settings
+
+# LLM 调用重试策略：瞬时连接错误/超时/限流/5xx 自动重试，指数退避
+LLM_RETRY_TIMES = 3
+LLM_RETRY_BACKOFF_SECONDS = 1.5  # 退避基数：1.5s → 3s → 4.5s
+
+
+class _ThinkTagFilter:
+    """过滤模型输出中的 <think>...</think> 内容，支持流式分片。"""
+
+    START_TAG = "<think>"
+    END_TAG = "</think>"
+
+    def __init__(self):
+        self._inside_think = False
+        self._carry = ""
+
+    @staticmethod
+    def _suffix_overlap(text: str, tag: str) -> int:
+        """返回 text 末尾与 tag 前缀重叠的最大长度（不含完整 tag）。"""
+        max_overlap = min(len(tag) - 1, len(text))
+        for size in range(max_overlap, 0, -1):
+            if text.endswith(tag[:size]):
+                return size
+        return 0
+
+    def feed(self, text: str) -> str:
+        if not text:
+            return ""
+
+        data = self._carry + text
+        self._carry = ""
+        output = []
+        idx = 0
+
+        while idx < len(data):
+            if self._inside_think:
+                end_idx = data.find(self.END_TAG, idx)
+                if end_idx == -1:
+                    # 在思考段内，保留尾部用于跨 chunk 匹配结束标签。
+                    keep = max(idx, len(data) - len(self.END_TAG) + 1)
+                    self._carry = data[keep:]
+                    return "".join(output)
+                self._inside_think = False
+                idx = end_idx + len(self.END_TAG)
+                continue
+
+            start_idx = data.find(self.START_TAG, idx)
+            if start_idx == -1:
+                visible = data[idx:]
+                overlap = self._suffix_overlap(visible, self.START_TAG)
+                if overlap:
+                    self._carry = visible[-overlap:]
+                    visible = visible[:-overlap]
+                output.append(visible)
+                return "".join(output)
+
+            output.append(data[idx:start_idx])
+            self._inside_think = True
+            idx = start_idx + len(self.START_TAG)
+
+        return "".join(output)
+
+    def finalize(self) -> str:
+        # 仅清理状态，不输出残留（残留通常是未闭合 think 内容或不完整标签）。
+        self._carry = ""
+        return ""
+
+
+class LLMGateway:
+    """LLM网关服务"""
+    
+    def __init__(self):
+        # 从环境变量或配置中获取API配置
+        self.api_key = os.getenv('TUTOR_OPENAI_API_KEY', settings.TUTOR_OPENAI_API_KEY)
+        self.api_base = os.getenv('TUTOR_OPENAI_API_BASE', settings.TUTOR_OPENAI_API_BASE)
+        self.model = os.getenv('TUTOR_OPENAI_MODEL', settings.TUTOR_OPENAI_MODEL)
+
+        self.max_tokens = int(os.getenv('LLM_MAX_TOKENS', settings.LLM_MAX_TOKENS))
+        self.temperature = float(os.getenv('LLM_TEMPERATURE', settings.LLM_TEMPERATURE))
+        
+        # 初始化OpenAI客户端（兼容魔搭API）
+        self.client = OpenAI(
+            api_key=self.api_key,
+            base_url=self.api_base
+        )
+        # 最近一次调用的token用量
+        self.last_usage: Optional[dict] = None
+
+    @staticmethod
+    def _strip_think_blocks(text: Optional[str]) -> str:
+        if not text:
+            return ""
+        filter_ = _ThinkTagFilter()
+        cleaned = filter_.feed(text)
+        cleaned += filter_.finalize()
+        return cleaned
+    
+    def get_completion_sync(
+        self, 
+        system_prompt: str, 
+        messages: List[Dict[str, str]],
+        max_tokens: Optional[int] = None,
+        temperature: Optional[float] = None
+    ) -> str:
+        """
+        同步获取LLM完成结果（瞬时错误自动重试）
+
+        Args:
+            system_prompt: 系统提示词
+            messages: 消息列表
+            max_tokens: 最大token数
+            temperature: 温度参数
+
+        Returns:
+            str: LLM生成的回复
+        """
+        # 构建完整的消息列表
+        full_messages = [{"role": "system", "content": system_prompt}] + messages
+
+        # 使用传入的参数或默认值
+        max_tokens = max_tokens or self.max_tokens
+        temperature = temperature or self.temperature
+
+        last_exc: Optional[Exception] = None
+        for attempt in range(1, LLM_RETRY_TIMES + 1):
+            try:
+                # 直接调用OpenAI客户端（同步）
+                response = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=full_messages,
+                    max_tokens=max_tokens,
+                    temperature=temperature
+                )
+
+                # 提取回复内容
+                # 记录usage（若提供）
+                try:
+                    usage = getattr(response, 'usage', None)
+                    if usage is not None:
+                        self.last_usage = {
+                            'prompt_tokens': getattr(usage, 'prompt_tokens', None),
+                            'completion_tokens': getattr(usage, 'completion_tokens', None),
+                            'total_tokens': getattr(usage, 'total_tokens', None),
+                        }
+                    else:
+                        self.last_usage = None
+                except Exception:
+                    self.last_usage = None
+
+                if response.choices and len(response.choices) > 0:
+                    raw_content = response.choices[0].message.content or ""
+                    content = self._strip_think_blocks(raw_content)
+                    if content.strip():
+                        return content
+                    return "I apologize, but I couldn't generate a response at this time."
+                else:
+                    return "I apologize, but I couldn't generate a response at this time."
+
+            except (APIConnectionError, APITimeoutError, RateLimitError, InternalServerError) as exc:
+                # 瞬时错误：指数退避后重试，重试耗尽才返回错误文本
+                last_exc = exc
+                if attempt < LLM_RETRY_TIMES:
+                    time.sleep(LLM_RETRY_BACKOFF_SECONDS * attempt)
+                    continue
+                print(f"Error calling LLM API (retried {LLM_RETRY_TIMES} times): {exc}")
+                return f"I apologize, but I encountered an error: {str(exc)}"
+
+            except Exception as e:
+                print(f"Error calling LLM API: {e}")
+                return f"I apologize, but I encountered an error: {str(e)}"
+
+        # 理论不可达：所有重试均失败后兜底返回
+        return f"I apologize, but I encountered an error: {last_exc}"
+
+    def get_stream_completion_sync(
+        self, 
+        system_prompt: str, 
+        messages: List[Dict[str, str]],
+        max_tokens: Optional[int] = None,
+        temperature: Optional[float] = None
+    ):
+        """
+        同步获取LLM流式完成结果
+        
+        Args:
+            system_prompt: 系统提示词
+            messages: 消息列表
+            max_tokens: 最大token数
+            temperature: 温度参数
+            
+        Yields:
+            str: LLM生成的回复片段
+        """
+        try:
+            # 构建完整的消息列表
+            full_messages = [{"role": "system", "content": system_prompt}] + messages
+            
+            # 使用传入的参数或默认值
+            max_tokens = max_tokens or self.max_tokens
+            temperature = temperature or self.temperature
+            
+            # 直接调用OpenAI客户端（同步）
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=full_messages,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                stream=True,
+            )
+            
+            # 流式返回内容（过滤 <think>...</think>）
+            think_filter = _ThinkTagFilter()
+            for chunk in response:
+                if chunk.choices and len(chunk.choices) > 0:
+                    delta = chunk.choices[0].delta
+                    if delta.content:
+                        visible = think_filter.feed(delta.content)
+                        if visible:
+                            yield visible
+            tail = think_filter.finalize()
+            if tail:
+                yield tail
+            
+        except Exception as e:
+            print(f"Error calling LLM API: {e}")
+            yield f"I apologize, but I encountered an error: {str(e)}"
+
+    async def get_stream_completion(
+        self, 
+        system_prompt: str, 
+        messages: List[Dict[str, str]],
+        max_tokens: Optional[int] = None,
+        temperature: Optional[float] = None
+    ):
+        """
+        获取LLM流式完成结果
+        
+        Args:
+            system_prompt: 系统提示词
+            messages: 消息列表
+            max_tokens: 最大token数
+            temperature: 温度参数
+            
+        Yields:
+            str: LLM生成的回复片段
+        """
+        try:
+            # 构建完整的消息列表
+            full_messages = [{"role": "system", "content": system_prompt}] + messages
+            
+            # 使用传入的参数或默认值
+            max_tokens = max_tokens or self.max_tokens
+            temperature = temperature or self.temperature
+            
+            # 调用LLM API - OpenAI客户端是同步的
+            # 使用 asyncio.to_thread 来在异步环境中运行同步代码
+            
+            response = await asyncio.to_thread(
+                self.client.chat.completions.create,
+                model=self.model,
+                messages=full_messages,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                stream=True,
+            )
+            #return response
+            # 流式返回内容（过滤 <think>...</think>）
+            think_filter = _ThinkTagFilter()
+            for chunk in response:
+                if chunk.choices and len(chunk.choices) > 0:
+                    delta = chunk.choices[0].delta
+                    if delta.content:
+                        visible = think_filter.feed(delta.content)
+                        if visible:
+                            yield visible
+            tail = think_filter.finalize()
+            if tail:
+                yield tail
+            
+            '''
+            # 直接异步流式
+            async with self.client.chat.completions.stream(
+                model=self.model,
+                messages=full_messages,
+                max_tokens=max_tokens,
+                temperature=temperature,
+            ) as stream:
+                async for event in stream:
+                    if event.type == "message.delta" and event.delta.get("content"):
+                        yield event.delta["content"]
+            '''
+        except Exception as e:
+            print(f"Error calling LLM API: {e}")
+            yield f"I apologize, but I encountered an error: {str(e)}"
+       
+    
+
+
+# 创建单例实例
+llm_gateway = LLMGateway()

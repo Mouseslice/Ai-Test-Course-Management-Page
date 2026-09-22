@@ -1,0 +1,51 @@
+{
+  "topic_id": "5_3",
+  "title": "5_3 在网页中嵌入教学视频",
+  "description_md": "# 任务描述：\n请在网页中嵌入一段编程教学视频。\n\n## 要求：\n1. 使用 `<video>` 标签并启用 `controls` 属性。\n2. 添加 `<source>` 元素，类型为 `video/mp4`。\n3. 设置视频宽度为 `100%`。\n4. 提供后备文本，提示浏览器不支持视频播放。",
+  "start_code": {
+    "html": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n    <section class=\"list-demo\">\n  <h3>课程教学视频</h3>\n  #请在此处添加video标签 -->\n</section>\n</body>\n</html>",
+    "css": "",
+    "js": ""
+  },
+  "checkpoints": [
+    {
+      "name": "存在 video 标签",
+      "type": "assert_attribute",
+      "selector": "video",
+      "attribute": "controls",
+      "assertion_type": "exists",
+      "feedback": "请添加带有 controls 的 <video> 标签。"
+    },
+    {
+      "name": "source 设置正确",
+      "type": "assert_attribute",
+      "selector": "video source",
+      "attribute": "type",
+      "assertion_type": "equals",
+      "value": "video/mp4",
+      "feedback": "请确保 source 的 type 属性设置为 video/mp4。"
+    },
+    {
+      "name": "宽度设置为 100%",
+      "type": "assert_attribute",
+      "selector": "video",
+      "attribute": "width",
+      "assertion_type": "equals",
+      "value": "100%",
+      "feedback": "请设置 video 元素的 width=\"100%\" 以适应容器宽度。"
+    },
+    {
+      "name": "video 有回退文本",
+      "type": "assert_text_content",
+      "selector": "video",
+      "assertion_type": "contains",
+      "value": "浏览器不支持视频播放",
+      "feedback": "请在 <video> 标签中添加回退提示。"
+    }
+  ],
+  "answer": {
+    "html": "<section class=\"list-demo\">\n  <h3>课程教学视频</h3>\n  <video controls width=\"100%\">\n    <source src=\"demo-video.mp4\" type=\"video/mp4\">\n    浏览器不支持视频播放。\n  </video>\n</section>",
+    "css": "",
+    "js": ""
+  }
+}

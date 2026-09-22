@@ -1,0 +1,77 @@
+{
+  "topic_id": "1_3",
+  "title": "1_3 构建页面基本结构",
+  "description_md": "# 任务描述：\n请编写一个完整的 HTML 文档结构，包含必要的声明、基础标签以及页面的标题和底部信息，目标是掌握 HTML 文档的基本组成部分。\n\n## 要求：\n1. 在文档开头添加 `<!DOCTYPE html>` 声明，并使用 `<html>` 标签包裹所有内容。\n2. 将 `<html>` 标签的语言属性设置为中文（`lang=\"zh\"`）。\n3. 在 `<head>` 标签内添加 `<meta charset=\"UTF-8\">`，定义字符编码为 UTF-8。\n4. 在 `<head>` 标签内添加 `<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">`，以支持响应式布局。\n5. 在 `<head>` 标签内添加 `<title>` 标签，内容为“编程学习教程”。\n6. 在 `<body>` 标签中添加 `<footer>` 元素，用于显示页面底部信息。\n7. 保持 HTML 标签层次完整、结构规范。\n\n## 示例代码：\n```html\n<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n    <footer>© 2025 编程学习教程</footer>\n</body>\n</html>\n```",
+  "start_code": {
+    "html": "#请在此处完成HTML基础结构的定义！",
+    "css": "",
+    "js": ""
+  },
+  "checkpoints": [
+    {
+      "name": "DOCTYPE声明检查",
+      "type": "custom_script",
+      "script": "return window.userOriginalHTML && window.userOriginalHTML.toLowerCase().includes('<!doctype html>');",
+      "feedback": "请在代码最顶端添加<!DOCTYPE html>声明。"
+    },
+    {
+      "name": "<html>标签检查",
+      "type": "custom_script", 
+      "script": "return window.userOriginalHTML && window.userOriginalHTML.toLowerCase().includes('<html') && window.userOriginalHTML.toLowerCase().includes('</html>');",
+      "feedback": "请添加完整的<html>标签对。"
+    },
+    {
+      "name": "语言属性检查",
+      "type": "custom_script",
+      "script": "return window.userOriginalHTML && (window.userOriginalHTML.includes('lang=\"zh\"') || window.userOriginalHTML.includes(\"lang='zh'\"));",
+      "feedback": "请为<html>标签设置lang属性为'zh'。"
+    },
+    {
+      "name": "<head>标签检查",
+      "type": "custom_script",
+      "script": "return window.userOriginalHTML && window.userOriginalHTML.includes('<head>') && window.userOriginalHTML.includes('</head>');",
+      "feedback": "请在<html>标签内添加<head>标签对。"
+    },
+    {
+      "name": "字符编码检查",
+      "type": "custom_script",
+      "script": "const metaCharset = document.querySelector('meta[charset]'); return metaCharset && metaCharset.getAttribute('charset').toUpperCase() === 'UTF-8';",
+      "feedback": "请在<head>标签内添加<meta charset=\"UTF-8\">标签。"
+    },
+    {
+      "name": "viewport检查",
+      "type": "custom_script",
+      "script": "const metaViewport = document.querySelector('meta[name=\"viewport\"]'); return metaViewport && metaViewport.getAttribute('content').includes('width=device-width');",
+      "feedback": "请添加viewport meta标签设置响应式布局。"
+    },
+    {
+      "name": "<title>标签检查",
+      "type": "custom_script",
+      "script": "return document.title !== null && document.title !== '';",
+      "feedback": "请在<head>标签内添加<title>标签对。"
+    },
+    {
+      "name": "标题内容检查",
+      "type": "custom_script",
+      "script": "return document.title === '编程学习教程';",
+      "feedback": "请将<title>标签的内容设置为'编程学习教程'。"
+    },
+    {
+      "name": "<body>标签检查",
+      "type": "custom_script",
+      "script": "return window.userOriginalHTML && window.userOriginalHTML.includes('<body>') && window.userOriginalHTML.includes('</body>');",
+      "feedback": "请添加<body>标签对。"
+    },
+    {
+      "name": "<footer>标签检查",
+      "type": "custom_script",
+      "script": "return document.querySelector('footer') !== null;",
+      "feedback": "请在<body>标签内添加<footer>标签对。"
+    }
+  ],
+  "answer": {
+    "html": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n    <footer>© 2025 编程学习教程</footer>\n</body>\n</html>",
+    "css": "",
+    "js": ""
+  }
+}

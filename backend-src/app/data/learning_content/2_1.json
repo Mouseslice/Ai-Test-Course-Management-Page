@@ -1,0 +1,42 @@
+{
+    "topic_id": "2_1",
+    "title": "2_1 使用盒子元素进行内容划分",
+    "levels": [
+            {
+                "level": 1,
+                "description": "在网页开发中，我们经常需要将页面上的内容进行分组和布局，这就需要用到HTML中的容器类标签。其中最常用、最基础的就是`div`标签。`div`是英文'division'（意为“分割”或“分区”）的缩写，它是一个没有特定语义的块级元素，主要作用是作为一个通用的容器，用来包裹其他HTML元素，从而实现结构划分和样式控制。你可以把`div`想象成一个看不见的盒子，它可以装下标题、段落、图片等任何内容，并且可以通过CSS给这个盒子设置边框、背景、大小、位置等外观效果。由于`div`本身不带有任何默认样式或含义，因此它的灵活性非常高，是构建网页布局的基础工具之一。每个`div`都可以通过设置`id`或`class`属性来标识自己，方便后续用CSS或JavaScript对其进行操作。例如，`id=\"header\"`可以表示这是页面头部区域的盒子，而`id=\"main-content\"`则可能代表主要内容区。掌握`div`的使用，是学习前端布局的第一步，也是理解现代网页结构的关键。"
+            },
+            {
+                "level": 2,
+                "description": "在实际开发中，`div`通常不会单独使用，而是与其他HTML标签配合，形成清晰的内容结构。比如在一个博客页面中，我们可以用一个`div`包裹整个导航栏，另一个`div`包含文章列表，再用一个`div`放页脚信息。这样做的好处是能让代码更有条理，也便于后期维护和样式管理。此外，`div`常与CSS中的盒模型概念紧密结合。每一个`div`都遵循盒模型，包括内容区域、内边距（padding）、边框（border）和外边距（margin）。通过调整这些属性，我们可以精确控制元素之间的间距和布局效果。同时，多个嵌套的`div`可以构成复杂的页面骨架，例如经典的三栏布局：左侧侧边栏、中间主内容区、右侧广告栏，都是通过多个`div`并列排列实现的。值得注意的是，虽然`div`非常灵活，但过度使用会导致HTML语义化不足，影响可访问性和SEO。因此，在语义明确的场景下，应优先使用如`header`、`nav`、`main`、`article`等具有语义的标签，而不是一味依赖`div`。"
+            },
+            {
+                "level": 3,
+                "description": "从底层机制来看，`div`作为块级元素，默认占据父容器的整个宽度，并在其前后自动换行。这意味着每个`div`都会独占一行，除非通过CSS改变其显示方式，例如设置`display:inline-block`或使用Flexbox、Grid布局技术。浏览器在解析HTML时会为每个`div`创建一个独立的渲染盒（rendering box），这个盒的尺寸和位置由CSS决定。了解这一点有助于理解为什么某些布局会出现意外的空白或重叠。性能方面，过多的`div`嵌套层级（俗称“div soup”）会增加DOM树的复杂度，导致页面加载变慢和重绘重排成本上升。因此，现代前端开发提倡扁平化的结构设计，尽量减少不必要的包装层。另外，`id`属性在页面中必须唯一，不能重复，否则可能导致JavaScript选择器行为异常或CSS样式冲突。为了提升可维护性，建议使用语义清晰、易于理解的`id`命名，如`hero-section`、`call-to-action`等，避免使用无意义的数字或缩写。掌握这些细节，可以帮助开发者写出更高效、更健壮的代码。"
+            },
+            {
+                "level": 4,
+                "description": "下面我们通过一个综合示例来巩固对`div`标签的理解。假设我们要制作一个简单的个人简介页面，包含头像、姓名和自我介绍三个部分。我们可以使用`div`将这些内容组织起来，并通过`id`属性区分不同区域。示例如下：\n\n```html\n<h2>个人简介</h2>\n<div id=\"profile\">\n  <div id=\"avatar\">\n    <img src=\"profile.jpg\" alt=\"我的头像\">\n  </div>\n  <div id=\"name\">\n    <h3>张小明</h3>\n  </div>\n  <div id=\"bio\">\n    <p>热爱编程与设计，专注于用户体验优化。</p>\n  </div>\n</div>\n```\n\n在这个例子中，最外层的`div`（id为\"profile\"）作为整体容器，内部三个`div`分别代表头像、姓名和简介。每个`div`都有唯一的`id`，便于后续添加样式或交互功能。你可以尝试在浏览器中运行这段代码，观察页面结构的变化。接下来，请你动手实践：创建一个新的HTML文件，使用`div`标签包裹一段关于你喜欢的电影的描述，并为其设置`id=\"movie-intro\"`。确保该`div`包含了标题和至少一段文字说明。完成后，检查元素是否正确嵌套，`id`是否准确设置。这将帮助你更好地掌握`div`的基本用法。"
+            }
+        ],
+    "sc_all": [
+        {"topic_id": "1_1", "select_element": ["h1", "h2", "h3", "h4", "h5", "h6", "p","span"]},
+        {"topic_id": "1_2", "select_element": []},
+        {"topic_id": "1_3", "select_element": ["<!DOCTYPE>", "html", "head", "body","meta", "title","footer"]},
+        {"topic_id": "2_1", "select_element": ["div"]},
+        {"topic_id": "2_2", "select_element": ["ol","li"]},
+        {"topic_id": "2_3", "select_element": ["ul"]},
+        {"topic_id": "3_1", "select_element": ["input", "button"]},
+        {"topic_id": "3_2", "select_element": ["label"]},
+        {"topic_id": "3_3", "select_element": ["form"]},
+        {"topic_id": "4_1", "select_element": []},
+        {"topic_id": "4_2", "select_element": []},
+        {"topic_id": "4_3", "select_element": []},
+        {"topic_id": "5_1", "select_element": ["img"]},
+        {"topic_id": "5_2", "select_element": ["audio","source"]},
+        {"topic_id": "5_3", "select_element": ["video"]},
+        {"topic_id": "6_1", "select_element": []},
+        {"topic_id": "6_2", "select_element": []},
+        {"topic_id": "6_3", "select_element": []}
+    ]
+}

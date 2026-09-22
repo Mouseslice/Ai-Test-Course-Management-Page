@@ -1,0 +1,71 @@
+{
+  "topic_id": "4_3",
+  "title": "4_3 使用 Flex 布局构建响应式导航栏",
+  "description_md": "# 任务描述：\n请使用 Flexbox 创建一个响应式导航栏，使标题和导航链接布局合理。\n\n## 要求：\n1. 为 `header` 元素设置 `display: flex`。\n2. 使用 `justify-content: space-between` 让标题与导航链接分列左右。\n3. 为 `.nav-links` 添加 Flex 布局，使其中的链接横向排列、居中显示、支持自动换行，并设置 `gap: 1.5rem`。",
+  "start_code": {
+    "html": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n    <header>\n  <h2>编程学习教程</h2>\n  <nav class=\"nav-links\">\n    <a href=\"#\" class=\"nav-link\">首页</a>\n    <a href=\"#\" class=\"nav-link\">课程</a>\n    <a href=\"#\" class=\"nav-link\">资源</a>\n    <a href=\"#\" class=\"nav-link\">联系</a>\n  </nav>\n</header>\n</body>\n</html>",
+    "css": "# 请在此处添加你的CSS样式代码！",
+    "js": ""
+  },
+  "checkpoints": [
+    {
+      "name": "头部使用 Flex 布局",
+      "type": "assert_style",
+      "selector": "header",
+      "css_property": "display",
+      "assertion_type": "equals",
+      "value": "flex",
+      "feedback": "请为 header 设置 display: flex。"
+    },
+    {
+      "name": "头部左右对齐",
+      "type": "assert_style",
+      "selector": "header",
+      "css_property": "justify-content",
+      "assertion_type": "equals",
+      "value": "space-between",
+      "feedback": "请设置 header 的 justify-content 为 space-between。"
+    },
+    {
+      "name": "导航链接容器使用 Flex 布局",
+      "type": "assert_style",
+      "selector": ".nav-links",
+      "css_property": "display",
+      "assertion_type": "equals",
+      "value": "flex",
+      "feedback": "请将 .nav-links 设置为 flex 布局。"
+    },
+    {
+      "name": "导航链接容器允许换行",
+      "type": "assert_style",
+      "selector": ".nav-links",
+      "css_property": "flex-wrap",
+      "assertion_type": "equals",
+      "value": "wrap",
+      "feedback": "请确保 .nav-links 设置了 flex-wrap: wrap。"
+    },
+    {
+      "name": "导航链接容器居中对齐",
+      "type": "assert_style",
+      "selector": ".nav-links",
+      "css_property": "justify-content",
+      "assertion_type": "equals",
+      "value": "center",
+      "feedback": "请设置 .nav-links 的 justify-content 为 center。"
+    },
+    {
+      "name": "导航链接间距设置",
+      "type": "assert_style",
+      "selector": ".nav-links",
+      "css_property": "gap",
+      "assertion_type": "equals",
+      "value": "24px",
+      "feedback": "请为 .nav-links 设置 gap 为 1.5rem。"
+    }
+  ],
+  "answer": {
+    "html": "<header>\n  <h2>编程学习教程</h2>\n  <nav class=\"nav-links\">\n    <a href=\"#\" class=\"nav-link\">首页</a>\n    <a href=\"#\" class=\"nav-link\">课程</a>\n    <a href=\"#\" class=\"nav-link\">资源</a>\n    <a href=\"#\" class=\"nav-link\">联系</a>\n  </nav>\n</header>",
+    "css": "header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\n.nav-links {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  gap: 1.5rem;\n}",
+    "js": ""
+  }
+}

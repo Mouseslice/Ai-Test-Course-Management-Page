@@ -1,0 +1,47 @@
+{
+  "topic_id": "2_3",
+  "title": "2_3 创建无序列表",
+  "description_md": "# 任务描述：\n请在 `<h3>` 元素下方添加一个无序列表，用于展示学习计划，目标是掌握无序列表 `<ul>` 与 `<li>` 标签的基本用法。\n\n## 要求：\n1. 在 `<h3>` 元素下方创建一个无序列表。\n2. 在列表中依次添加三个项目：学习HTML基础、练习CSS样式、构建简单网页。",
+  "start_code": {
+    "html": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n    <h3>前端学习计划</h3>\n# 请在此处添加你的代码！\n</body>\n</html>",
+    "css": "",
+    "js": ""
+  },
+  "checkpoints": [
+    {
+      "name": "无序列表ul元素位置检查",
+      "type": "custom_script",
+      "script": "const elements = Array.from(document.querySelectorAll('h3, ul')); const h3Index = elements.indexOf(document.querySelector('h3')); const ulIndex = elements.indexOf(document.querySelector('ul')); return h3Index < ulIndex;",
+      "feedback": "ul元素应该在h3元素下方。"
+    },
+    {
+      "name": "无序列表中li元素列表项数量检查",
+      "type": "custom_script",
+      "script": "return document.querySelector('ul').querySelectorAll('li').length == 3",
+      "feedback": "ul元素里应该包含3个li元素。"
+    },
+    {
+      "name": "无序列表中li元素第一个列表项内容检查",
+      "type": "custom_script",
+      "script": "return document.querySelector('ul li:nth-child(1)').textContent == '学习HTML基础'",
+      "feedback": "无序列表中第一个li元素的内容应该是'学习HTML基础'。"
+    },
+    {
+      "name": "无序列表中li元素第二个列表项内容检查",
+      "type": "custom_script",
+      "script": "return document.querySelector('ul li:nth-child(2)').textContent == '练习CSS样式'",
+      "feedback": "无序列表中第二个li元素的内容应该是'练习CSS样式'。"
+    },
+    {
+      "name": "无序列表中li元素第三个列表项内容检查",
+      "type": "custom_script",
+      "script": "return document.querySelector('ul li:nth-child(3)').textContent == '构建简单网页'",
+      "feedback": "无序列表中第三个li元素的内容应该是'构建简单网页'。"
+    }
+  ],
+  "answer": {
+    "html": "<h3>前端学习计划</h3>\n<ul>\n  <li>学习HTML基础</li>\n  <li>练习CSS样式</li>\n  <li>构建简单网页</li>\n</ul>",
+    "css": "",
+    "js": ""
+  }
+}

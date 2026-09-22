@@ -1,0 +1,90 @@
+{
+  "topic_id": "1_end",
+  "title": "1_end 第1章文本与页面结构基础综合测试",
+  "description_md": "# 任务描述：\n请综合运用本章所学知识点，构建一个关于 “WCF Best Cat Exhibition”（WCF最佳猫咪展览） 的介绍页面。\n\n## 要求：\n1. 创建页面基本结构：\n   - 添加 HTML5 文档类型声明。\n   - 设置页面语言为英文。\n   - 添加页面标题为 “WCF Best Cat Exhibition”。\n   - 设置字符编码为 UTF-8。\n   - 添加 viewport meta 标签，确保响应式布局。\n2. 添加页面内容结构：\n   - 添加主标题 `<h1>`：“WCF Best Cat Exhibition”。\n   - 添加二级标题 `<h2>`：“Welcome to the Cat Exhibition”。\n   - 添加三级标题 `<h3>`：“Event Highlights”。\n   - 添加另一个三级标题 `<h3>`：“Daily Schedule”。\n   - 在适当位置添加段落 `<p>`，内容为：Join us for a purr-fect celebration of feline beauty and grace. Discover various cat breeds and experience the excitement of the event!\n3. 应用文本格式化：\n   - 使用 `<span>` 包裹 “purr-fect”且设置class为bold-text，并通过 CSS 的 `font-weight` 属性加粗。\n   - 使用 `<span>` 包裹 “grace”且设置class为italic-text，并通过 CSS 的 `font-style` 属性设置为斜体。",
+  "start_code": {
+    "html": "# 请在此处完成HTML代码！",
+    "css": "# 请在此处完成CSS代码样式！",
+    "js": ""
+  },
+  "checkpoints": [
+    {
+      "name": "HTML5文档类型声明检查",
+      "type": "custom_script",
+      "script": "return window.userOriginalHTML && window.userOriginalHTML.includes('<!DOCTYPE html>');",
+      "feedback": "请添加HTML5文档类型声明<!DOCTYPE html>"
+    },
+    {
+      "name": "html标签lang属性检查",
+      "type": "custom_script",
+      "script": "return window.userOriginalHTML && /<html\\s+[^>]*lang\\s*=\\s*['\"]en['\"]/i.test(window.userOriginalHTML);",
+      "feedback": "请为html标签添加lang='en'属性"
+    },
+    {
+      "name": "页面标题检查",
+      "type": "assert_text_content",
+      "selector": "title",
+      "assertion_type": "equals",
+      "value": "WCF Best Cat Exhibition",
+      "feedback": "请设置页面标题为'WCF Best Cat Exhibition'"
+    },
+    {
+      "name": "主标题h1元素检查",
+      "type": "assert_element",
+      "selector": "h1",
+      "assertion_type": "exists",
+      "feedback": "请添加主标题h1元素"
+    },
+    {
+      "name": "主标题内容检查",
+      "type": "assert_text_content",
+      "selector": "h1",
+      "assertion_type": "equals",
+      "value": "WCF Best Cat Exhibition",
+      "feedback": "h1元素的内容应为'WCF Best Cat Exhibition'"
+    },
+    {
+      "name": "二级标题h2检查",
+      "type": "assert_element",
+      "selector": "h2",
+      "assertion_type": "exists",
+      "feedback": "请添加二级标题h2元素"
+    },
+    {
+      "name": "二级标题内容检查",
+      "type": "assert_text_content",
+      "selector": "h2",
+      "assertion_type": "equals",
+      "value": "Welcome to the Cat Exhibition",
+      "feedback": "h2元素的内容应为'Welcome to the Cat Exhibition'"
+    },
+    {
+      "name": "段落元素内容检查",
+      "type": "assert_text_content",
+      "selector": "p",
+      "assertion_type": "equals",
+      "value": "Join us for a purr-fect celebration of feline beauty and grace. Discover various cat breeds and experience the excitement of the event!",
+      "feedback": "请给p元素中添加正确的段落内容"
+    },
+    {
+      "name": "加粗文本样式检查",
+      "type": "custom_script",
+      "script": "const boldElement = document.querySelector('p span.bold-text'); if (!boldElement) return false; const computedStyle = window.getComputedStyle(boldElement); return computedStyle.fontWeight === 'bold' || computedStyle.fontWeight === '700';",
+      "feedback": "请使用CSS的font-weight属性为'bold'添加加粗样式"
+    },
+    {
+      "name": "斜体文本样式检查",
+      "type": "assert_style",
+      "selector": "p span.italic-text",
+      "css_property": "font-style",
+      "assertion_type": "equals",
+      "value": "italic",
+      "feedback": "请使用CSS的font-style属性为'italic'添加斜体样式"
+    }
+  ],
+  "answer": {
+    "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>WCF Best Cat Exhibition</title>\n    <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n    <h1>WCF Best Cat Exhibition</h1>\n    <h2>Welcome to the Cat Exhibition</h2>\n    <h3>Event Highlights</h3>\n    <p>Join us for a <span class=\"bold-text\">purr-fect</span> celebration of feline beauty and <span class=\"italic-text\">grace</span>. Discover various cat breeds and experience the excitement of the event!</p>\n</body>\n</html>",
+    "css": ".bold-text {\n    font-weight: bold;\n}\n\n.italic-text {\n    font-style: italic;\n}",
+    "js": ""
+  }
+}

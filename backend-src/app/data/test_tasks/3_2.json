@@ -1,0 +1,101 @@
+{
+  "topic_id": "3_2",
+  "title": "3_2 复选框与单选框练习",
+  "description_md": "# 任务描述：\n请在页面中添加复选框与单选框，模拟技能与级别选择功能。\n\n## 要求：\n1. 创建两个复选框，`name` 值为 `skills`。\n   - 第一个复选框 `value` 为 `HTML`，内容为“掌握HTML”。\n   - 第二个复选框 `value` 为 `CSS`，内容为“掌握CSS”。\n2. 在复选框下方创建两个单选框，`name` 值为 `level`。\n   - 第一个单选框 `value` 为“初级”，内容为“初级程序员”。\n   - 第二个单选框 `value` 为“高级”，内容为“高级程序员”。",
+  "start_code": {
+    "html": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n    # 请在此处添加你的代码！\n</body>\n</html>",
+    "css": "",
+    "js": ""
+  },
+  "checkpoints": [
+    {
+   "name": "复选框type属性检查",
+   "type": "custom_script",
+   "script": "return document.querySelectorAll('input[type=\"checkbox\"]').length > 0 &&Array.from(document.querySelectorAll('input[type=\"checkbox\"]')).every(el => el.type === 'checkbox')",
+  "feedback": "所有复选框的type属性都应该为checkbox"
+    },
+    {
+   "name": "复选框type属性检查",
+   "type": "custom_script",
+   "script": "return document.querySelectorAll('input[type=\"checkbox\"]').length > 0 &&Array.from(document.querySelectorAll('input[type=\"checkbox\"]')).every(el => el.name === 'skills')",
+  "feedback": "所有复选框的type属性都应该为checkbox"
+    },
+    {
+      "name": "复选框数量检查",
+      "type": "custom_script",
+      "script": "return document.querySelectorAll('input[name=\"skills\"][type=\"checkbox\"]').length === 2",
+      "feedback": "复选框数量应该为2"
+    },
+    {
+      "name": "第一个复选框value属性检查",
+      "type": "custom_script",
+      "script": "return document.querySelectorAll('input[name=\"skills\"][type=\"checkbox\"]')[0].value === 'HTML'",
+      "feedback": "第一个复选框的value属性应该为：HTML"
+    },
+    {
+      "name": "第一个复选框内容检查",
+      "type": "custom_script",
+      "script": "return document.querySelectorAll('input[name=\"skills\"][type=\"checkbox\"]')[0].parentElement.textContent.trim() === '掌握HTML'",
+      "feedback": "第一个复选框内容应该为：掌握HTML"
+    },
+    {
+      "name": "第二个复选框value属性检查",
+      "type": "custom_script",
+      "script": "return document.querySelectorAll('input[name=\"skills\"][type=\"checkbox\"]')[1].value === 'CSS'",
+      "feedback": "第二个复选框的value属性应该为：CSS"
+    },
+    {
+      "name": "第二个复选框内容检查",
+      "type": "custom_script",
+      "script": "return document.querySelectorAll('input[name=\"skills\"][type=\"checkbox\"]')[1].parentElement.textContent.trim() === '掌握CSS'",
+      "feedback": "第二个复选框内容应该为：掌握CSS"
+    },
+    {
+      "name": "单选框type属性检查",
+      "type": "custom_script",
+      "script": "return document.querySelectorAll('input[type=\"radio\"]').length > 0 &&Array.from(document.querySelectorAll('input[type=\"radio\"]')).every(el => el.type === 'radio')",
+      "feedback": "单选框的type属性应该为radio"
+    },
+    {
+      "name": "单选框name属性检查",
+      "type": "custom_script",
+      "script": "return document.querySelectorAll('input[type=\"radio\"]').length > 0 &&Array.from(document.querySelectorAll('input[type=\"radio\"]')).every(el => el.name === 'level')",
+      "feedback": "name属性应该为level"
+    },
+    {
+      "name": "单选框数量检查",
+      "type": "custom_script",
+      "script": "return document.querySelectorAll('input[name=\"level\"][type=\"radio\"]').length === 2",
+      "feedback": "单选框数量应为2"
+    },
+    {
+      "name": "第一个单选框value属性检查",
+      "type": "custom_script",
+      "script": "return document.querySelectorAll('input[name=\"level\"][type=\"radio\"]')[0].value === '初级'",
+      "feedback": "第一个单选框的value属性应该为：初级"
+    },
+    {
+      "name": "第一个单选框内容检查",
+      "type": "custom_script",
+      "script": "return document.querySelectorAll('input[name=\"level\"][type=\"radio\"]')[0].parentElement.textContent.trim() === '初级程序员'",
+      "feedback": "第一个单选框的内容应该为：初级程序员"
+    },
+    {
+      "name": "第二个单选框value属性检查",
+      "type": "custom_script",
+      "script": "return document.querySelectorAll('input[name=\"level\"][type=\"radio\"]')[1].value === '高级'",
+      "feedback": "第二个单选框的value属性应该为：高级"
+    },
+    {
+      "name": "第二个单选框内容检查",
+      "type": "custom_script",
+      "script": "return document.querySelectorAll('input[name=\"level\"][type=\"radio\"]')[1].parentElement.textContent.trim() === '高级程序员'",
+      "feedback": "第二个单选框的内容应该为：高级程序员"
+    }
+  ],
+  "answer": {
+    "html": "<label><input type=\"checkbox\" name=\"skills\" value=\"HTML\">掌握HTML</label>\n<label><input type=\"checkbox\" name=\"skills\" value=\"CSS\">掌握CSS</label>\n<label><input type=\"radio\" name=\"level\" value=\"初级\">初级程序员</label>\n<label><input type=\"radio\" name=\"level\" value=\"高级\">高级程序员</label>",
+    "css": "",
+    "js": ""
+  }
+}

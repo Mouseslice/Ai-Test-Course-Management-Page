@@ -1,0 +1,54 @@
+{
+  "topic_id": "3_3",
+  "title": "3_3 表单提交机制",
+  "description_md": "# 任务描述：\n请为用户注册表单添加提交功能，通过 JavaScript 处理提交逻辑。\n\n## 要求：\n1. 使用 `<form>` 元素包裹所有表单控件。\n2. 在 `<form>` 标签中通过 `onsubmit` 属性绑定 `handleRegister` 函数。\n3. 在 `handleRegister` 函数中阻止表单默认提交行为。\n4. 在控制台输出“注册信息已处理”。",
+  "start_code": {
+    "html": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n    <label>用户名：<input type=\"text\" name=\"username\"></label>\n<label>邮箱：<input type=\"email\" name=\"email\"></label>\n<button type=\"submit\">注册</button>\n</body>\n</html>",
+    "css": "",
+    "js": "# 请在此处添加你的JavaScript代码！"
+  },
+  "checkpoints": [
+    {
+      "name": "form元素存在检查",
+      "type": "assert_element",
+      "selector": "form",
+      "assertion_type": "exists",
+      "feedback": "请确保使用<form>元素包裹所有表单控件。"
+    },
+    {
+      "name": "onsubmit属性检查",
+      "type": "assert_attribute",
+      "selector": "form",
+      "attribute": "onsubmit",
+      "assertion_type": "equals",
+      "value": "return handleRegister(event)",
+      "feedback": "请为form元素添加onsubmit属性，并赋值return handleRegister(event)。"
+    },
+    {
+      "name": "提交按钮类型检查",
+      "type": "assert_attribute",
+      "selector": "button",
+      "attribute": "type",
+      "assertion_type": "equals",
+      "value": "submit",
+      "feedback": "请确保提交按钮的type属性为submit。"
+    },
+    {
+      "name": "handleRegister函数存在检查",
+      "type": "custom_script",
+      "script": "return typeof handleRegister === 'function'",
+      "feedback": "请定义handleRegister函数来处理表单提交事件。"
+    },
+    {
+      "name": "handleRegister函数功能检查",
+      "type": "custom_script",
+      "script": "if (typeof handleRegister !== 'function') return false; const event = { preventDefault: () => {} }; let consoleOutput = ''; const originalLog = console.log; console.log = (msg) => { consoleOutput = msg; }; try { handleRegister(event); } finally { console.log = originalLog; } return consoleOutput === '注册信息已处理';",
+      "feedback": "请确保handleRegister函数阻止默认行为并在控制台输出'注册信息已处理'。"
+    }
+  ],
+  "answer": {
+    "html": "<form onsubmit=\"return handleRegister(event)\">\n  <label>用户名：<input type=\"text\" name=\"username\"></label>\n  <label>邮箱：<input type=\"email\" name=\"email\"></label>\n  <button type=\"submit\">注册</button>\n</form>",
+    "css": "",
+    "js": "function handleRegister(event) {\n  event.preventDefault();\n  console.log('注册信息已处理');\n  return false;\n}"
+  }
+}

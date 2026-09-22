@@ -1,0 +1,42 @@
+{
+    "topic_id": "4_1",
+    "title": "4_1 设置颜色与字体",
+    "levels": [
+            {
+                "level": 1,
+                "description": "在网页开发中，颜色和字体是决定页面视觉风格的两个最基本也是最重要的因素。颜色不仅影响美观，还能传达情感和引导用户注意力；而字体则直接影响文字的可读性和整体排版效果。CSS（层叠样式表）是控制这些视觉样式的语言。要设置网页中的文字颜色，我们使用 color 属性，它的值可以是十六进制颜色码（如 #ff0000 表示红色）、英文颜色名（如 red）、RGB 值或 HSL 值等。例如，color: #333; 会将文字设为深灰色。字体则通过 font-family 属性来指定，它可以接受一个字体名称或字体族的列表，浏览器会按顺序尝试使用列表中的字体，如果用户的设备上没有第一种字体，就会尝试下一种，以此类推。比如 font-family: 'Times New Roman', serif; 表示优先使用 Times New Roman 字体，如果没有就使用任意衬线字体。通常我们会给 body 元素设置这些全局样式，这样整个页面的文本都会继承这些设置，从而保持风格统一。理解这些基础属性是构建美观网页的第一步。"
+            },
+            {
+                "level": 2,
+                "description": "在实际开发中，我们很少只设置单一的颜色或字体，而是将它们组合成一套设计系统，以确保网站的一致性和专业性。例如，除了设置 body 的字体和颜色外，我们还可能为标题、链接、按钮等不同元素定义不同的颜色和字体样式。为了提高效率和维护性，我们可以使用 CSS 类选择器来复用样式。比如，定义一个 .text-primary 类来表示主要文字颜色，.btn 类来设置按钮的字体大小和背景色。此外，现代网页设计常使用自定义字体，这可以通过 @font-face 规则实现，它允许我们引入网络字体文件，使页面显示非系统默认的字体。同时，颜色的运用也需要考虑对比度，确保文字在背景上清晰可读，这对无障碍访问至关重要。渐变色是一种高级的颜色表现形式，通过 linear-gradient() 函数可以创建从一种颜色平滑过渡到另一种颜色的效果，常用于背景设计，使页面更具层次感和现代感。掌握这些常见场景和组合用法，能让我们更灵活地控制页面的视觉呈现。"
+            },
+            {
+                "level": 3,
+                "description": "深入理解颜色和字体的机制有助于我们编写更高效、更兼容的代码。CSS 中的颜色计算和渲染是由浏览器完成的，不同的颜色格式在性能上几乎没有差异，但使用变量（CSS Custom Properties）可以大幅提升样式的可维护性。例如，我们可以定义 :root { --primary-color: #006400; }，然后在需要的地方使用 var(--primary-color)，这样修改主题色时只需更改一处。字体加载是一个潜在的性能瓶颈，尤其是网络字体，它们会阻塞文本渲染，导致 FOIT（无文本时的空白）或 FOUT（字体切换闪烁）。为了避免这些问题，可以使用 font-display: swap; 来指示浏览器先显示备用字体，等自定义字体加载完成后再替换。此外，font-family 列表的设计也有讲究，应包含通用字体族作为兜底，如 sans-serif、serif 或 monospace。对于复杂的多语言网站，还需考虑不同语言的最佳字体匹配。了解这些底层机制和优化策略，可以帮助我们构建既美观又高性能的网页应用。"
+            },
+            {
+                "level": 4,
+                "description": "现在让我们通过一个综合实例来巩固所学知识。假设我们要制作一个关于宇宙探索的网页，要求整体风格科技感十足。请按照以下要求编写代码：为整个页面设置统一的字体和背景效果。首先，在 CSS 中选中 body 元素，将其字体设置为 'Helvetica Neue', Arial, sans-serif，这样既能保证现代感，又有良好的兼容性。接着，将文字颜色设为浅灰色 #e0e0e0，以增强可读性。最后，为背景添加一个从深蓝到紫罗兰的垂直渐变，模拟星空效果，具体值为 linear-gradient(to bottom, #001f3f, #7a288a)。注意，这些样式应直接应用于 body，以便所有子元素继承。以下是完整的示例代码，你可以将其应用到你的 HTML 结构中进行测试。\n\n```css\nbody {\n  font-family: 'Helvetica Neue', Arial, sans-serif;\n  color: #e0e0e0;\n  background: linear-gradient(to bottom, #001f3f, #7a288a);\n  margin: 0;\n  padding: 20px;\n}\n\nh1 {\n  text-align: center;\n  font-size: 2.5em;\n}\n\np {\n  line-height: 1.6;\n}\n```\n\n这个练习不仅能检验你对颜色和字体设置的掌握程度，也为接下来的测试题打下坚实基础。"
+            }
+        ],
+    "sc_all": [
+        {"topic_id": "1_1", "select_element": ["h1", "h2", "h3", "h4", "h5", "h6", "p","span"]},
+        {"topic_id": "1_2", "select_element": []},
+        {"topic_id": "1_3", "select_element": ["<!DOCTYPE>", "html", "head", "body","meta", "title","footer"]},
+        {"topic_id": "2_1", "select_element": ["div"]},
+        {"topic_id": "2_2", "select_element": ["ol","li"]},
+        {"topic_id": "2_3", "select_element": ["ul"]},
+        {"topic_id": "3_1", "select_element": ["input", "button"]},
+        {"topic_id": "3_2", "select_element": ["label"]},
+        {"topic_id": "3_3", "select_element": ["form"]},
+        {"topic_id": "4_1", "select_element": []},
+        {"topic_id": "4_2", "select_element": []},
+        {"topic_id": "4_3", "select_element": []},
+        {"topic_id": "5_1", "select_element": ["img"]},
+        {"topic_id": "5_2", "select_element": ["audio","source"]},
+        {"topic_id": "5_3", "select_element": ["video"]},
+        {"topic_id": "6_1", "select_element": []},
+        {"topic_id": "6_2", "select_element": []},
+        {"topic_id": "6_3", "select_element": []}
+    ]
+}

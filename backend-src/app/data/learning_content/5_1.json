@@ -1,0 +1,42 @@
+{
+    "topic_id": "5_1",
+    "title": "5_1 插入与管理图片",
+    "levels": [
+            {
+                "level": 1,
+                "description": "在网页开发中，图片是增强视觉效果和用户体验的重要元素。HTML 提供了 `<img>` 标签用于在页面中插入图像。这个标签是一个自闭合标签，意味着它不需要结束标签。要显示一张图片，必须使用 `src` 属性指定图片的路径，这个路径可以是相对路径（如 `images/cat.jpg`），也可以是绝对路径（如 `https://example.com/cat.jpg`）。此外，`alt` 属性也是必不可少的，它用于描述图片的内容，当图片因网络问题无法加载时，会显示这段文字；同时它也对屏幕阅读器等辅助技术至关重要，帮助视障用户理解页面内容，提升网页的无障碍访问能力。例如 `<img src=\"logo.png\" alt=\"公司标志\">` 就是一个基本用法。值得注意的是，`<img>` 标签默认是行内元素，但在布局中常配合 CSS 调整大小和位置。掌握这些基础属性是前端开发中处理多媒体内容的第一步。"
+            },
+            {
+                "level": 2,
+                "description": "在实际项目中，仅仅插入图片是不够的，还需要考虑图片在不同设备上的展示效果。常见的做法是通过 CSS 控制图片的尺寸，避免其超出容器或导致布局错乱。例如，将图片的宽度设置为 100%，可以让它自动适应父容器的宽度，这在响应式设计中非常关键。但仅设置宽度可能会导致图片高度不一致，出现拉伸变形的问题。这时就需要引入 `object-fit` 属性来控制图片在其容器内的缩放和裁剪方式。`object-fit: cover` 是一种常用策略，它会让图片保持原始宽高比的同时，完全覆盖其容器，多余部分会被裁剪掉，非常适合用于卡片式布局中的封面图。而 `object-fit: contain` 则确保整个图片都可见，但可能会留下空白区域。结合 `width: 100%` 和 `height` 固定值，可以实现统一尺寸的图片展示效果，这对构建整齐美观的列表或网格布局尤为重要。"
+            },
+            {
+                "level": 3,
+                "description": "深入理解 `object-fit` 的工作机制有助于优化图片渲染性能和用户体验。该属性本质上决定了可替换元素（如图片、视频）如何根据其包含块的尺寸进行填充。`cover` 模式适用于背景图或封面图场景，强调视觉完整性，而 `fill` 会拉伸图片填满容器，可能导致失真。`scale-down` 则选择 `none` 和 `contain` 中最小的缩放方式，适合需要缩小大图的场景。在现代前端框架中，这类样式常被封装为通用类名，如 `.img-cover`，以便复用。同时，还需关注图片资源的优化：使用适当的格式（如 WebP）、懒加载（loading=\"lazy\"）和响应式图片（picture 元素与 srcset 属性）来减少带宽消耗并加快页面加载速度。特别是在移动网络环境下，合理管理图片不仅能提升性能，还能降低用户流量成本，是构建高性能网站的关键环节之一。"
+            },
+            {
+                "level": 4,
+                "description": "现在我们来完成一个实战任务：创建一个商品展示页面，每个商品卡片包含一张图片和简要信息。要求图片完整填充卡片顶部区域，不产生变形，并具备良好的可访问性。以下是示例代码：\n\n```html\n<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>商品展示</title>\n  <style>\n    .product-card {\n      width: 250px;\n      border: 1px solid #ddd;\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 2px 6px rgba(0,0,0,0.1);\n    }\n    .product-card img {\n      width: 100%;\n      height: 180px;\n      object-fit: cover;\n    }\n    .product-info {\n      padding: 12px;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"product-card\">\n    <img src=\"https://via.placeholder.com/250x180\" alt=\"智能手表正面图\">\n    <div class=\"product-info\">\n      <h3>智能手表</h3>\n      <p>多功能健康监测</p>\n    </div>\n  </div>\n</body>\n</html>\n```\n\n在这个例子中，`.product-card` 定义了卡片的整体样式，`img` 设置了固定高度和 `object-fit: cover`，确保所有图片显示效果一致且不失真。请模仿此结构完成你的猫咪卡片图片插入任务。"
+            }
+        ],
+    "sc_all": [
+        {"topic_id": "1_1", "select_element": ["h1", "h2", "h3", "h4", "h5", "h6", "p","span"]},
+        {"topic_id": "1_2", "select_element": []},
+        {"topic_id": "1_3", "select_element": ["<!DOCTYPE>", "html", "head", "body","meta", "title","footer"]},
+        {"topic_id": "2_1", "select_element": ["div"]},
+        {"topic_id": "2_2", "select_element": ["ol","li"]},
+        {"topic_id": "2_3", "select_element": ["ul"]},
+        {"topic_id": "3_1", "select_element": ["input", "button"]},
+        {"topic_id": "3_2", "select_element": ["label"]},
+        {"topic_id": "3_3", "select_element": ["form"]},
+        {"topic_id": "4_1", "select_element": []},
+        {"topic_id": "4_2", "select_element": []},
+        {"topic_id": "4_3", "select_element": []},
+        {"topic_id": "5_1", "select_element": ["img"]},
+        {"topic_id": "5_2", "select_element": ["audio","source"]},
+        {"topic_id": "5_3", "select_element": ["video"]},
+        {"topic_id": "6_1", "select_element": []},
+        {"topic_id": "6_2", "select_element": []},
+        {"topic_id": "6_3", "select_element": []}
+    ]
+}

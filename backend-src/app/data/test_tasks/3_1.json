@@ -1,0 +1,63 @@
+{
+  "topic_id": "3_1",
+  "title": "3_1 创建登录表单的文本框与按钮",
+  "description_md": "# 任务描述：\n请创建一个简单的登录表单，包含用户名输入框和登录按钮。\n\n## 要求：\n1. 创建一个文本框，提示文本为“请输入用户名”。\n2. 在文本框下方创建一个按钮，按钮文本为“登录”。",
+  "start_code": {
+    "html": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n    # 请在此处添加你的代码！\n</body>\n</html>",
+    "css": "",
+    "js": ""
+  },
+  "checkpoints": [
+    {
+      "name": "input表单元素检查",
+      "type": "assert_element",
+      "selector": "input",
+      "assertion_type": "exists",
+      "feedback": "请检查input元素是否存在。"
+    },
+    {
+      "name": "input表单元素类型检查",
+      "type": "assert_attribute",
+      "selector": "input",
+      "attribute": "type",
+      "assertion_type": "equals",
+      "value": "text",
+      "feedback": "请检查input元素type属性是否为text。"
+    },
+    {
+      "name": "input表单提示文本检查",
+      "type": "assert_attribute",
+      "selector": "input",
+      "attribute": "placeholder",
+      "assertion_type": "equals",
+      "value": "请输入用户名",
+      "feedback": "请检查input元素的placeholder属性是否正确。"
+    },
+    {
+      "name": "button按钮元素检查",
+      "type": "assert_element",
+      "selector": "button",
+      "assertion_type": "exists",
+      "feedback": "请检查button元素是否存在。"
+    },
+    {
+      "name": "button按钮文本检查",
+      "type": "assert_text_content",
+      "selector": "button",
+      "assertion_type": "equals",
+      "value": "登录",
+      "feedback": "请检查button按钮的文本内容是否为登录。"
+    },
+    {
+      "name": "button按钮位置检查",
+      "type": "custom_script",
+      "script": "const elements = Array.from(document.querySelectorAll('input, button')); const inputIndex = elements.indexOf(document.querySelector('input')); const buttonIndex = elements.indexOf(document.querySelector('button')); return inputIndex < buttonIndex;",
+      "feedback": "请确保button元素位于input元素下方。"
+    }
+  ],
+  "answer": {
+    "html": "<input type=\"text\" placeholder=\"请输入用户名\">\n<button>登录</button>",
+    "css": "",
+    "js": ""
+  }
+}
