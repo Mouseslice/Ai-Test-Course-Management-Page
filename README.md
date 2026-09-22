@@ -13,15 +13,13 @@
 cp .env.template .env
 # 在 .env 中填写评审运行所需的 API Key 和模型配置
 ```
-2. 导入 Docker 镜像：
+2. 构建并启动服务（首次会自动构建后端/前端镜像，需几分钟；Dockerfile 已内置国内镜像源）：
 ```bash
-docker load -i artifacts/adaptive-tutor-system_backend_competition-v1.tar
-docker load -i artifacts/adaptive-tutor-system_frontend_competition-v1.tar
+docker compose --env-file .env -f docker-compose.submission.yml up -d --build
 ```
-3. 启动服务：
-```bash
-docker compose --env-file .env -f docker-compose.submission.yml up -d
-```
-4. 验证运行状态：
+3. 验证运行状态：
 - 前端访问地址：`http://localhost:8325`
 - 执行 `docker compose --env-file .env -f docker-compose.submission.yml ps`，应看到 `backend`、`frontend`、`redis` 以及所有 `celery-*` 服务均处于运行状态。
+
+> 说明：后端首次启动会自动创建数据库表结构（无需手动执行建表脚本）。
+> 预构建镜像包位于 `artifacts/`（本地评审用，未纳入 git，因体积超过 GitHub 单文件限制）。

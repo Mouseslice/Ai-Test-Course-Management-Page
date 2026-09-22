@@ -36,6 +36,9 @@ services:
     restart: unless-stopped
 
   backend:
+    build:
+      context: ./backend-src
+      dockerfile: Dockerfile
     image: adaptive-tutor-system/backend:competition-v1
     container_name: ats-comp-backend
     depends_on:
@@ -108,6 +111,9 @@ services:
     restart: unless-stopped
 
   frontend:
+    build:
+      context: ./frontend-src
+      dockerfile: Dockerfile
     image: adaptive-tutor-system/frontend:competition-v1
     container_name: ats-comp-frontend
     depends_on:

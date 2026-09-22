@@ -8,8 +8,8 @@ venv/
 # ============ 前端构建产物 ============
 node_modules/
 dist/
-# 教师端构建产物（部署时拷贝，不纳入源码仓库）
-frontend-src/teacher-dist/
+# 注意：frontend-src/teacher-dist/ 是教师端构建产物，
+# frontend Dockerfile 构建时 COPY 该目录，必须入库保证 fork 后可一键部署
 
 # ============ Docker 构建产物 ============
 # artifacts/ 存放导出的镜像 tar（数百 MB，不纳入仓库）
